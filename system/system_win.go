@@ -4,8 +4,6 @@ package system
 import (
 	"log"
 	"strings"
-
-	"github.com/wmi"
 )
 
 type Win32_BaseBoard struct {
@@ -53,7 +51,7 @@ func GetOS() string {
 
 	var dst []Win32_OperatingSystem
 	q := "SELECT Caption FROM Win32_OperatingSystem"
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		return ""
 	}
@@ -64,7 +62,7 @@ func GetOST() string {
 
 	var dst []Win32_OperatingSystem
 	q := "SELECT Caption, CSDVersion FROM Win32_OperatingSystem"
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		log.Println(err.Error())
 		return ""
@@ -76,7 +74,7 @@ func GetBios() []Win32_BIOS {
 
 	var dst []Win32_BIOS
 	q := "SELECT SerialNumber, Version FROM Win32_BIOS WHERE (SerialNumber IS NOT NULL)"
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		return dst
 	}
@@ -88,7 +86,7 @@ func Getuuid() string {
 
 	var dst []Win32_ComputerSystemProduct
 	q := "SELECT UUID FROM Win32_ComputerSystemProduct"
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		return ""
 	}
@@ -101,7 +99,7 @@ func GetProductName() string {
 	var dst []Win32_BaseBoard
 	q := "SELECT Product FROM Win32_BaseBoard"
 
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 
 		return ""
@@ -114,7 +112,7 @@ func GetComputerSystem() []Win32_ComputerSystem {
 
 	var dst []Win32_ComputerSystem
 	q := "SELECT Manufacturer, Model FROM Win32_ComputerSystem"
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		return dst
 	}
@@ -142,7 +140,7 @@ func IsVirtual(Version, Model string) string {
 func GetMem() []Win32_PhysicalMemory {
 	var dst []Win32_PhysicalMemory
 	q := "SELECT Name, Capacity, MemoryType FROM Win32_Physicalmemory"
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		return dst
 	}
@@ -157,7 +155,7 @@ func CustomTrim(s string) string {
 func GetDisk() []Win32_LogicalDisk {
 	var dst []Win32_LogicalDisk
 	q := "SELECT Name, MediaType, Size FROM Win32_LogicalDisk"
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		return dst
 	}
@@ -169,7 +167,7 @@ func CpuModel() []Win32_Processor {
 	var dst []Win32_Processor
 	q := "SELECT Name, NumberOfCores, NumberOfLogicalProcessors FROM Win32_Processor"
 
-	err := wmi.Query(q, &dst)
+	err := Query(q, &dst)
 	if err != nil {
 		return dst
 	}

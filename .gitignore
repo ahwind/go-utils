@@ -1,0 +1,6 @@
+.tmp
+.bak
+.exe
+data/*.tmp
+*.log
+.idea
