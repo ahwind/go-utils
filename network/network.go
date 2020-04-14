@@ -1,16 +1,20 @@
 package network
 
 import (
-	lib_network "common/lib/network"
-
 	"net"
 )
+
+type Interface struct {
+	Name  string   // Name of the interface
+	Mac   string   // Mac address of the interface
+	Addrs []string // List of IP addresses of the interface
+}
 
 /*
 	Get list of network interfaces
 */
-func GetNetInterfaces() ([]lib_network.Interface, error) {
-	var interfaces []lib_network.Interface
+func GetNetInterfaces() ([]Interface, error) {
+	var interfaces []Interface
 	var err error
 	var netInterfaces []net.Interface
 	var netInterface net.Interface
@@ -21,7 +25,7 @@ func GetNetInterfaces() ([]lib_network.Interface, error) {
 	}
 
 	for _, netInterface = range netInterfaces {
-		var netIf lib_network.Interface
+		var netIf Interface
 		netIf.Name = netInterface.Name
 		netIf.Mac = netInterface.HardwareAddr.String()
 		tmpNetIf, err := netInterface.Addrs()
