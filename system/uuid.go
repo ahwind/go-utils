@@ -1,4 +1,4 @@
-package sys
+package system
 
 import (
 	"crypto/md5"
