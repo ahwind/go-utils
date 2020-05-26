@@ -33,11 +33,13 @@ type Win32_PhysicalMemory struct {
 	Name       string
 	Capacity   int
 	MemoryType int
+	Manufacturer string
 }
 
 type Win32_LogicalDisk struct {
 	Name      string
 	MediaType int
+	DriveType int
 	Size      int
 }
 
@@ -139,7 +141,7 @@ func IsVirtual(Version, Model string) string {
 
 func GetMem() []Win32_PhysicalMemory {
 	var dst []Win32_PhysicalMemory
-	q := "SELECT Name, Capacity, MemoryType FROM Win32_Physicalmemory"
+	q := "SELECT Name, Capacity, MemoryType, Manufacturer FROM Win32_Physicalmemory"
 	err := Query(q, &dst)
 	if err != nil {
 		return dst
@@ -154,7 +156,7 @@ func CustomTrim(s string) string {
 
 func GetDisk() []Win32_LogicalDisk {
 	var dst []Win32_LogicalDisk
-	q := "SELECT Name, MediaType, Size FROM Win32_LogicalDisk"
+	q := "SELECT Name, MediaType, DriveType, Size FROM Win32_LogicalDisk"
 	err := Query(q, &dst)
 	if err != nil {
 		return dst
