@@ -6,7 +6,7 @@ import (
 	"crypto/des"
 	"encoding/hex"
 	"fmt"
-	"time"
+	//"time"
 )
 
 func EncryptDES_CBC(key, src string) string {
