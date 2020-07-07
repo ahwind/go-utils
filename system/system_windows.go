@@ -1,4 +1,5 @@
 // +build windows
+
 package system
 
 import (
@@ -30,9 +31,9 @@ type Win32_ComputerSystemProduct struct {
 }
 
 type Win32_PhysicalMemory struct {
-	Name       string
-	Capacity   int
-	MemoryType int
+	Name         string
+	Capacity     int
+	MemoryType   int
 	Manufacturer string
 }
 
