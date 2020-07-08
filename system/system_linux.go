@@ -8,8 +8,6 @@ import (
 	"strings"
 	"syscall"
 	"time"
-
-	"github.com/ahwind/go-utils/system"
 )
 
 /*
@@ -32,7 +30,7 @@ func GetUptime() string {
 */
 
 func GetKernel() string {
-	data, err := system.CmdOutNoLn("uname", "-r")
+	data, err := CmdOutNoLn("uname", "-r")
 	if err != nil {
 		return ""
 	}
@@ -53,7 +51,7 @@ func GetType() string {
 }
 
 func GetManufacturer() string {
-	out, err := exec.Command("sh", "-c", "/usr/sbin/dmidecode -s system-manufacturer").Output()
+	out, err := exec.Command("sh", "-c", "/usr/sbin/dmidecode -s select-manufacturer").Output()
 	if err != nil {
 		return ""
 	}
